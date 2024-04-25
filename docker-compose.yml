@@ -7,10 +7,10 @@ services:
     image: postgres:14-alpine
     volumes:
       - ./pgdb:/var/lib/postgresql/data
+      - ./create_container_database.sql:/docker-entrypoint-initdb.d/create_container_database.sql
     environment:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_USER=root
-      - POSTGRES_DB=nextcrud
     networks:
       - backend
     
