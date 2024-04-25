@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: pgdb
+    restart: always
+    image: postgres:14-alpine
+    volumes:
+      - ./pgdb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=root
+      - POSTGRES_DB=nextcrud
+    networks:
+      - backend
+    
+  next-notes:
+    container_name: next-notes-crud
+    depends_on:
+      - postgres
+    build: .
+    ports:
+      - 3000:3000
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
