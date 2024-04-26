@@ -24,8 +24,6 @@ services:
     ports:
       - 3000:3000
     command: sh -c "npm run build && npm start" 
-    environment:
-      - DATABASE_URL="postgresql://root:pass@pgdb:5432/nextcrud?schema=public"
     networks:
       - backend
 
