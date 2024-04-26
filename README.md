@@ -1,3 +1,5 @@
+<p>This project used NextJS Prisma and Postgresql</p>
+
 <h3>How to start</h3>
 <br/>
 <h5>Docker</h5>
