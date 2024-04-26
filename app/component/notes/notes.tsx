@@ -1,19 +1,37 @@
+'use client'
 import Link from "next/link"
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+//import prisma from "../../../lib/prisma";
+import { useEffect, useState } from "react"
 
-export default async function Notes(){
-    let notes = await prisma.notes.findMany({
+interface note {
+    id: number
+    title: string
+    note: string
+}
+
+export default function Notes(){
+    /*let notes = await prisma.notes.findMany({
         orderBy: {
             id: 'asc'
         }
-    })
+    })*/
+
+    const [notes, setNotes] = useState([])
+
+    useEffect(() => {
+        fetch('/api',{
+            next: { revalidate: 3}
+        }).then(res => res.json()).then(data => {
+            console.log(data)
+            setNotes(data)
+        }).catch(e => console.log(e))
+    }, [])
 
     if(notes.length != 0)
         return(
             <div className="grid grid-cols-3 gap-3">
                 {
-                    notes.map((x, i: number) => {
+                    notes.map((x: note, i: number) => {
                         return(
                             <div key={x.id} className="bg-rose-500 rounded-lg my-2 p-2">
                                 <h2 className="text-xl">{x.title}</h2>

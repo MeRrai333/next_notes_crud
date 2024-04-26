@@ -5,28 +5,11 @@ services:
     container_name: pgdb
     restart: always
     image: postgres:14-alpine
-    ports:
-      - 5432:5432
     volumes:
       - ./pgdb:/var/lib/postgresql/data
       - ./create_container_database.sql:/docker-entrypoint-initdb.d/create_container_database.sql
     environment:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_USER=root
-    networks:
-      - backend
-    
-  next-notes:
-    container_name: next-notes-crud
-    depends_on:
-      - postgres
-    build: .
     ports:
-      - 3000:3000
-    command: sh -c "npm run build && npm run start:migrate" 
-    networks:
-      - backend
-
-networks:
-  backend:
-    driver: bridge
+      - 5432:5432
