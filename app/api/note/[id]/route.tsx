@@ -1,13 +1,11 @@
 import prisma from "../../../../lib/prisma"
 
-
 export async function GET(req: Request, {params} : {params: {id: string}}){
     const note = await prisma.notes.findUnique({
         where: {
             id: Number(params.id)
         }
     })
-
     return  Response.json({note})
 }
 
@@ -22,7 +20,6 @@ export async function PUT(req: Request, {params} : {params: {id: string}}){
             id: Number(params.id)
         }
     })
-
     return Response.json({dataUpdate, message: "ok"})
 }
 

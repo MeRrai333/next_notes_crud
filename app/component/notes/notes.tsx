@@ -19,9 +19,7 @@ export default function Notes(){
     const [notes, setNotes] = useState([])
 
     useEffect(() => {
-        fetch('/api',{
-            next: { revalidate: 3}
-        }).then(res => res.json()).then(data => {
+        fetch('/api').then(res => res.json()).then(data => {
             console.log(data)
             setNotes(data)
         }).catch(e => console.log(e))
